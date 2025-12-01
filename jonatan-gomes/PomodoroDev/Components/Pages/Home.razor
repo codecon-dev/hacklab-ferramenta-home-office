@@ -1,0 +1,137 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<section class="hero">
+    <div class="container">
+        <h1>Pomodoro para o Trabalho Remoto</h1>
+        <p class="lead">Trabalhar de casa não deveria significar trabalhar sem limites. Recupere foco e ritmo com períodos curtos e eficientes.</p>
+        <NavLink class="btn primary" href="pomodoroDev">Começar Pomodoro</NavLink>
+    </div>
+</section>
+
+<section class="split">
+    <div class="container">
+        <div class="card">
+            <h2>⏱️ O que é o Pomodoro?</h2>
+            <p>O Pomodoro alterna períodos de foco intenso com pausas estratégicas. Trabalhe 25 minutos, descanse 5 e a cada 4 ciclos faça uma pausa maior.</p>
+            <ul>
+                <li>Melhora a concentração</li>
+                <li>Reduz fadiga mental</li>
+                <li>Ajuda a manter ritmo e disciplina</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>💡 Como aplicar</h2>
+            <ol>
+                <li>Escolha uma tarefa clara</li>
+                <li>Configure 25 minutos e foque</li>
+                <li>Faça pausa curta e repita</li>
+            </ol>
+            <p class="muted">Pequenas regras, grandes resultados.</p>
+        </div>
+    </div>
+</section>
+
+<section class="benefits">
+    <div class="container">
+        <h2>💻 Por que usar no trabalho remoto?</h2>
+        <div class="grid">
+            <div class="item">
+                <h3>Menos sobrecarga</h3>
+                <p>Intervalos frequentes evitam acúmulo de tensão e tornam o dia previsível.</p>
+            </div>
+            <div class="item">
+                <h3>Limites saudáveis</h3>
+                <p>Separar foco e pausa ajuda a encerrar o dia sem levar trabalho para casa.</p>
+            </div>
+            <div class="item">
+                <h3>Mais produtividade</h3>
+                <p>Trabalhar por blocos melhora eficiência e diminui dispersão.</p>
+            </div>
+            <div class="item">
+                <h3>Rotina consistente</h3>
+                <p>Um método simples para criar hábito e disciplina diária.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="container">
+        <h2>Pronto para começar?</h2>
+        <NavLink class="btn primary large" href="pomodoroDev">Iniciar Pomodoro</NavLink>
+        <p class="small muted">Clique em Iniciar e desbloqueie o áudio quando solicitado.</p>
+    </div>
+</section>
+
+<style>
+    .container { max-width: 980px; margin: 0 auto; padding: 2rem; }
+
+    .hero {
+        padding: 4rem 0;
+        text-align: center;
+    }
+    .hero .lead {
+        margin: 1rem 0 1.6rem;
+        color: rgba(230,238,248,0.92);
+        font-size: 1.125rem;
+        max-width: 760px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn.primary {
+        background: linear-gradient(90deg, rgba(155,108,255,0.95), rgba(0,200,255,0.9));
+        color: #fff;
+        padding: 0.7rem 1.2rem;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn.large { padding: 0.9rem 1.6rem; font-size: 1.05rem; }
+
+    .split { padding: 2rem 0; }
+    .card {
+        background: rgba(255,255,255,0.06);
+        backdrop-filter: blur(4px);
+        padding: 1.6rem;
+        border-radius: 10px;
+        color: rgba(230,238,248,0.95);
+        margin-bottom: 1rem;
+    }
+    .split .container { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+
+    .card h2 { margin-top: 0; color: #fff; }
+    .card ul { margin: 0.5rem 0 0 1.2rem; }
+    .card ol { margin: 0.5rem 0 0 1.2rem; }
+
+    .muted { color: rgba(230,238,248,0.7); }
+
+    .benefits { padding: 2.5rem 0; }
+    .benefits h2 { text-align: center; color: #fff; margin-bottom: 1rem; }
+    .grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+    .item {
+        background: rgba(255,255,255,0.04);
+        padding: 1rem;
+        border-radius: 8px;
+        color: rgba(230,238,248,0.95);
+    }
+    .item h3 { margin: 0 0 0.5rem; color: #fff; }
+
+    .cta { padding: 3rem 0; text-align: center; }
+    .cta h2 { color: #fff; margin-bottom: 1rem; }
+    .cta .small { margin-top: 0.6rem; color: rgba(230,238,248,0.7); }
+
+    /* Responsivo */
+    @@media (max-width: 900px) {
+        .split .container { grid-template-columns: 1fr; }
+        .grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @@media (max-width: 560px) {
+        .grid { grid-template-columns: 1fr; }
+        .hero { padding: 3rem 1rem; }
+        .hero .lead { font-size: 1rem; }
+    }
+</style>
