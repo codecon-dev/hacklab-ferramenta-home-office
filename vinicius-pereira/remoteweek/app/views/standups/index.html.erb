@@ -1,0 +1,63 @@
+<div class="container my-5">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-bold">
+      <% if @organization %>
+        Standups – <%= @organization.name %>
+      <% else %>
+        Todos os Standups
+      <% end %>
+    </h1>
+  </div>
+  <div class="m-4">
+    <a class="w-100 btn btn-primary btn-sm" href='standups/new'> New standup </a>
+  </div>
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+      <table class="table table-hover table-striped mb-0 align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>Data</th>
+            <th>Usuário</th>
+            <th>Commits</th>
+            <th>Tickets</th>
+            <th>Ontem</th>
+            <th>Hoje</th>
+            <th class="text-end"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @standups.each do |standup| %>
+            <tr>
+              <td><%= standup.date.strftime("%d/%m/%Y") %></td>
+              <td><%= standup.user.name %></td>
+
+              <td>
+                <span class="badge bg-primary">
+                  <%= standup.commits_count %>
+                </span>
+              </td>
+
+              <td>
+                <span class="badge bg-success">
+                  <%= standup.support_tickets_resolved %>
+                </span>
+              </td>
+
+              <td><%= truncate(standup.yesterday.to_s, length: 40) %></td>
+              <td><%= truncate(standup.today.to_s, length: 40) %></td>
+
+              <td class="text-end">
+                <%= link_to "Ver", standup_path(standup),
+                  class: "btn btn-outline-secondary btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>

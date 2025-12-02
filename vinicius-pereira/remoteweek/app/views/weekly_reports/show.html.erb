@@ -1,0 +1,87 @@
+<div class="container my-5">
+
+  <div class="mb-4">
+    <h1 class="fw-bold">Relatório Semanal – <%= @organization.name %></h1>
+    <p class="text-muted fs-5">
+      <strong>Período:</strong>
+      <%= @weekly_report.week_start.strftime("%d/%m/%Y") %> —
+      <%= @weekly_report.week_end.strftime("%d/%m/%Y") %>
+    </p>
+  </div>
+
+  <% data = @weekly_report.report_data || {} %>
+
+  <% if data["manager_friendly_text"] %>
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-body">
+        <h3 class="fw-semibold mb-3">Resumo Executivo</h3>
+        <p class="fs-5 text-secondary"><%= simple_format(data["manager_friendly_text"]) %></p>
+      </div>
+    </div>
+  <% end %>
+
+  <% if data["highlights"].present? %>
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-body">
+        <h4 class="fw-semibold mb-3">Highlights da Semana</h4>
+        <ul class="list-group list-group-flush">
+          <% data["highlights"].each do |h| %>
+            <li class="list-group-item"><%= h %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <% if data["recurring_blockers"].present? %>
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-body">
+        <h4 class="fw-semibold mb-3 text-danger">⚠ Bloqueios Recorrentes</h4>
+        <ul class="list-group list-group-flush">
+          <% data["recurring_blockers"].each do |b| %>
+            <li class="list-group-item text-danger"><%= b %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <% if data["members"].present? %>
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-body">
+        <h4 class="fw-semibold mb-3">Métricas por Membro</h4>
+
+        <table class="table table-striped table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Nome</th>
+              <th>Commits</th>
+              <th>Tickets</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% data["members"].each do |m| %>
+              <tr>
+                <td><%= m["name"] %></td>
+                <td><span class="badge bg-primary"><%= m["commits"] %></span></td>
+                <td><span class="badge bg-success"><%= m["tickets"] %></span></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
+      <h4 class="fw-semibold mb-3">JSON Report Completo</h4>
+      <pre class="bg-light rounded p-3 small"><%= JSON.pretty_generate(data) %></pre>
+    </div>
+  </div>
+
+  <%= link_to "← Voltar para Lista de Relatórios",
+      organization_weekly_reports_path(@organization),
+      class: "btn btn-outline-secondary" %>
+
+</div>

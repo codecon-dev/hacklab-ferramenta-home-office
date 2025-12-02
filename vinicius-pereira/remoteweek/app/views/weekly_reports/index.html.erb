@@ -1,0 +1,88 @@
+<div class="container my-5">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-bold mb-0">Relatórios Semanais – <%= @organization.name %></h1>
+  </div>
+
+  <div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+
+      <table class="table table-striped table-hover align-middle mb-0">
+        <thead class="table-dark">
+          <tr>
+            <th>Semana (início)</th>
+            <th>Semana (fim)</th>
+            <th>Gerado em</th>
+            <th class="text-end"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @weekly_reports.each do |report| %>
+            <tr>
+              <td><%= report.week_start.strftime("%d/%m/%Y") %></td>
+              <td><%= report.week_end.strftime("%d/%m/%Y") %></td>
+              <td><%= report.generated_at&.strftime("%d/%m/%Y %H:%M") %></td>
+
+              <td class="text-end">
+                <%= link_to "Ver",
+                    organization_weekly_report_path(@organization, report),
+                    class: "btn btn-outline-secondary btn-sm" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <%= link_to "← Voltar para a Organização",
+        organization_path(@organization),
+        class: "btn btn-outline-dark" %>
+  </div>
+
+
+<div class="container my-5">
+
+  <div class="">
+    <h1 class="fw-bold mb-0">Relatórios Semanais <%= @organization.name %></h1>
+
+
+    <div class="d-flex flex-row">
+      <div>
+        <%= button_to "Integrações de hoje",
+              admin_run_integrations_now_path,
+              params: { id: "#{@organization.id}"},
+              method: :post,
+              class: "btn btn-sm btn-outline-secondary",
+              form: { data: { turbo_confirm: "Rodar integrações de hoje?" } } %>
+      </div>
+
+      <div>
+        <%= button_to "Relatórios faltantes",
+              admin_generate_missing_reports_path,
+              params: { id: "#{@organization.id}"},
+              method: :post,
+              class: "btn btn-sm btn-outline-secondary",
+              form: { data: { turbo_confirm: "Gerar relatórios faltantes?" } } %>
+      </div>
+
+      <div>
+        <%= button_to "Última semana",
+              admin_generate_last_week_report_path,
+              params: { id: "#{@organization.id}"},
+              method: :post,
+              class: "btn btn-sm btn-outline-secondary",
+              form: { data: { turbo_confirm: "Gerar relatório da última semana?" } } %>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
+</div>
