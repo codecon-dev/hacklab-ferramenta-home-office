@@ -1,0 +1,81 @@
+<div class="container my-5">
+
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
+      <h1 class="card-title fw-bold">
+        Standup de <%= @standup.user.name %> – <%= @standup.date.strftime("%d/%m/%Y") %>
+      </h1>
+      <p class="text-muted mb-0">
+        <strong>Organização:</strong> <%= @standup.organization.name %>
+      </p>
+    </div>
+  </div>
+
+  <div class="row g-4">
+
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <h4 class="fw-semibold">Ontem</h4>
+          <p class="text-secondary"><%= simple_format(@standup.yesterday) %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <h4 class="fw-semibold">Hoje</h4>
+          <p class="text-secondary"><%= simple_format(@standup.today) %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <h4 class="fw-semibold">Bloqueios</h4>
+          <p class="<%= @standup.blockers.present? ? 'text-danger' : 'text-success fw-bold' %>">
+            <%= simple_format(@standup.blockers.presence || "Nenhum 🚀") %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <h4 class="fw-semibold mb-3">Métricas</h4>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Commits</span>
+              <span class="badge bg-primary"><%= @standup.commits_count %></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Tickets de suporte resolvidos</span>
+              <span class="badge bg-success"><%= @standup.support_tickets_resolved %></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <h4 class="fw-semibold mb-3">Dados de Integrações (raw_json)</h4>
+          <pre class="bg-light p-3 rounded small">
+<%= JSON.pretty_generate(@standup.raw_integrations_data || {}) %>
+          </pre>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mt-4">
+    <%= link_to "← Voltar", (@standup.organization ? organization_standups_path(@standup.organization) : root_path),
+          class: "btn btn-outline-secondary" %>
+  </div>
+
+</div>

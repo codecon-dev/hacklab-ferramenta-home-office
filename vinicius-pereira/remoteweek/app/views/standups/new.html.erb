@@ -1,0 +1,63 @@
+<div class="container my-5">
+
+  <div class="card shadow border-0">
+    <div class="card-body p-4">
+
+      <h2 class="fw-bold mb-4">Novo Standup – <%= @organization.name %></h2>
+
+      <%= form_with model: [@organization, @standup], class: "row g-4" do |f| %>
+
+        <div class="col-md-4">
+          <%= f.label :date, "Data", class: "form-label fw-semibold" %>
+          <%= f.date_field :date, class: "form-control form-control-lg" %>
+        </div>
+
+        <div class="col-md-8">
+          <%= f.label :user_id, " Usuário responsável", class: "form-label fw-semibold" %>
+          <%= f.collection_select :user_id, @organization.users, :id, :name,
+                { prompt: "Selecione um membro" },
+                { class: "form-select form-select-lg" } %>
+        </div>
+
+        <div class="col-md-6">
+          <%= f.label :commits_count, "Commits", class: "form-label fw-semibold" %>
+          <%= f.number_field :commits_count, class: "form-control form-control-lg", min:0 %>
+        </div>
+
+        <div class="col-md-6">
+          <%= f.label :support_tickets_resolved, "Tickets Resolvidos", class: "form-label fw-semibold" %>
+          <%= f.number_field :support_tickets_resolved, class: "form-control form-control-lg", min:0 %>
+        </div>
+
+        <div class="col-12">
+          <%= f.label :yesterday, "Ontem", class: "form-label fw-semibold" %>
+          <%= f.text_area :yesterday, rows: 3,
+                class: "form-control form-control-lg", placeholder: "O que foi feito ontem..." %>
+        </div>
+
+        <div class="col-12">
+          <%= f.label :today, "Hoje", class: "form-label fw-semibold" %>
+          <%= f.text_area :today, rows: 3,
+                class: "form-control form-control-lg", placeholder: "Plano de hoje..." %>
+        </div>
+
+        <div class="col-12">
+          <%= f.label :blockers, "Bloqueios", class: "form-label fw-semibold" %>
+          <%= f.text_area :blockers, rows: 3,
+                class: "form-control form-control-lg", placeholder: "Há algo impedindo o avanço?" %>
+        </div>
+
+        <div class="d-flex justify-content-end gap-3 mt-4">
+          <%= link_to "Cancelar",
+                organization_standups_path(@organization),
+                class: "btn btn-outline-secondary px-4" %>
+
+          <%= f.submit "Salvar Standup",
+                class: "btn btn-primary px-4 fw-semibold" %>
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
